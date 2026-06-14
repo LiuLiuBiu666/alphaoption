@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Option | Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem 0;
+    }
+
+    .auth-card {
+      width: min(760px, 94vw);
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 1.1rem;
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .auth-tabs button {
+      border: 1px solid var(--line);
+      background: #f9fcff;
+      color: var(--ink);
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 0.68rem;
+      cursor: pointer;
+    }
+
+    .auth-tabs button.active {
+      border-color: #bcd4ee;
+      background: #eaf4ff;
+      color: var(--brand-dark);
+    }
+
+    .auth-panel {
+      display: none;
+    }
+
+    .auth-panel.active {
+      display: block;
+    }
+
+    .auth-panel h1 {
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+      margin-bottom: 0.35rem;
+    }
+
+    .auth-panel p {
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .auth-form label {
+      display: grid;
+      gap: 0.3rem;
+      font-weight: 600;
+      color: #3c536b;
+    }
+
+    .auth-form input {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.7rem;
+      font: inherit;
+    }
+
+    .auth-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .auth-row a {
+      color: var(--brand-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .auth-message {
+      margin-top: 0.7rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.6rem 0.7rem;
+      display: none;
+      font-weight: 600;
+    }
+
+    .auth-message.error {
+      display: block;
+      color: #8d2333;
+      border-color: #f2c0c8;
+      background: #fff3f6;
+    }
+
+    .auth-message.success {
+      display: block;
+      color: #15562f;
+      border-color: #b7e6ca;
+      background: #effcf4;
+    }
+
+    .auth-helper {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <div class="auth-tabs">
+        <button id="tabSignIn" class="active" type="button">Log In</button>
+        <button id="tabSignUp" type="button">Create Account</button>
+      </div>
+
+      <section id="panelSignIn" class="auth-panel active">
+        <h1>Welcome Back</h1>
+        <p>Log in to continue your Alpha Option learning journey.</p>
+
+        <form id="signInForm" class="auth-form">
+          <label>
+            Email Address
+            <input type="email" id="loginEmail" required placeholder="you@email.com" />
+          </label>
+          <label>
+            Password
+            <input type="password" id="loginPassword" required placeholder="Enter password" />
+          </label>
+          <div class="auth-row">
+            <label><input type="checkbox" id="rememberMe" /> Keep me signed in</label>
+            <a href="#" id="showSignUpLink">Need an account?</a>
+          </div>
+          <button class="cta" type="submit">Log In</button>
+        </form>
+      </section>
+
+      <section id="panelSignUp" class="auth-panel">
+        <h1>Create Your Account</h1>
+        <p>Get access to structured options education and weekly guidance.</p>
+
+        <form id="signUpForm" class="auth-form">
+          <label>
+            Full Name
+            <input type="text" id="registerName" required placeholder="Your full name" />
+          </label>
+          <label>
+            Email Address
+            <input type="email" id="registerEmail" required placeholder="you@email.com" />
+          </label>
+          <label>
+            Password
+            <input type="password" id="registerPassword" required placeholder="At least 8 characters" />
+          </label>
+          <div class="auth-row">
+            <span>Password must be at least 8 characters.</span>
+            <a href="#" id="showSignInLink">Already have an account?</a>
+          </div>
+          <button class="cta" type="submit">Create Account</button>
+        </form>
+      </section>
+
+      <div id="authMessage" class="auth-message"></div>
+      <p class="auth-helper">Demo account: demo@alphaoption.com / Demo12345!</p>
+      <p class="auth-helper"><a href="index.html">Back to homepage</a></p>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="login-page.js"></script>
+</body>
+</html>

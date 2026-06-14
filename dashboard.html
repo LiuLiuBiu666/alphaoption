@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Option | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dash-wrap {
+      min-height: 100vh;
+      padding: 2rem 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .dash-card {
+      width: min(900px, 94vw);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .dash-meta {
+      color: var(--muted);
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .dash-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem;
+      background: #f9fcff;
+    }
+
+    .dash-box h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .dash-box p {
+      margin-top: 0.4rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 780px) {
+      .dash-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="dash-wrap">
+    <section class="dash-card">
+      <div class="dash-top">
+        <div>
+          <h1 id="dashTitle">Member Dashboard</h1>
+          <p class="dash-meta" id="dashMeta">Loading profile...</p>
+        </div>
+        <div>
+          <a class="ghost" href="index.html">Back Home</a>
+          <button class="cta" id="dashLogoutBtn" type="button">Log Out</button>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <article class="dash-box">
+          <h3>Next Live Session</h3>
+          <p>Wednesday 8:00 PM UTC - Volatility playbook and risk controls.</p>
+        </article>
+        <article class="dash-box">
+          <h3>Your Track</h3>
+          <p>Pro plan active. Suggested module: Context-Based Strategies.</p>
+        </article>
+        <article class="dash-box">
+          <h3>Action Item</h3>
+          <p>Complete this week's pre-trade checklist and upload journal notes.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

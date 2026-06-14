@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Option | Information</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .info-shell {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem 0;
+    }
+
+    .info-card {
+      width: min(820px, 92vw);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+    }
+
+    .info-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .info-head h1 {
+      font-size: clamp(1.3rem, 2.4vw, 2rem);
+    }
+
+    .back-home {
+      text-decoration: none;
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .info-list {
+      margin: 0.75rem 0 0;
+      padding-left: 1.15rem;
+      color: var(--muted);
+    }
+
+    .info-list li {
+      margin: 0.3rem 0;
+    }
+
+    .info-sections {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .info-section {
+      border: 1px solid var(--line);
+      background: #f9fcff;
+      border-radius: 12px;
+      padding: 0.8rem;
+    }
+
+    .info-section h2 {
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .info-section p {
+      margin-top: 0.4rem;
+    }
+
+    .info-faq {
+      margin-top: 1rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.85rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .info-faq-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.7rem;
+      background: #fff;
+    }
+
+    .info-faq-item h3 {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+
+    .info-faq-item p {
+      margin-top: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="info-shell">
+    <section class="info-card reveal visible">
+      <div class="info-head">
+        <h1 id="infoTitle">Information</h1>
+        <a class="back-home" href="index.html">Back to Home</a>
+      </div>
+      <p id="infoText">Loading content...</p>
+      <ul class="info-list" id="infoList"></ul>
+      <div class="info-sections" id="infoSections"></div>
+      <div class="info-faq" id="infoFaq"></div>
+    </section>
+  </main>
+
+  <script src="footer-data.js"></script>
+  <script src="info.js"></script>
+</body>
+</html>
