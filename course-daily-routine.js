@@ -1,5 +1,16 @@
 const ALLOWED_COMMENT_EMAIL = 'leona_forex@shipnhanh.online';
-const STORAGE_KEY = 'dailyRoutineComments';
+const STORAGE_KEY = 'dailyRoutineComments_v2';
+
+const SEED_COMMENTS = [
+  {
+    text: 'This lesson completely changed how I structure my trading day. The EOD review framework alone saved me from several bad trades this week. Highly recommend building this routine from day one.',
+    createdAt: '2026-06-10T08:42:00.000Z',
+  },
+  {
+    text: 'The checklist approach before market open is something I have been missing for months. Once I started following the pre-market routine outlined here, my win rate improved noticeably. Great lesson.',
+    createdAt: '2026-06-12T14:17:00.000Z',
+  },
+];
 
 const emailInput = document.getElementById('commentEmail');
 const commentInput = document.getElementById('commentText');
@@ -35,13 +46,20 @@ function saveComments(comments) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
 }
 
+function ensureSeedComments() {
+  const stored = loadComments();
+  if (!stored.length) {
+    saveComments([...SEED_COMMENTS]);
+  }
+}
+
 function formatDate(isoString) {
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) {
     return '';
   }
 
-  return date.toLocaleString('vi-VN');
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 function escapeHtml(unsafe) {
@@ -57,15 +75,16 @@ function renderComments() {
   const comments = loadComments();
 
   if (!comments.length) {
-    commentList.innerHTML = '<div class="comment-item">Chua co binh luan nao.</div>';
+    commentList.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">No comments yet. Be the first to comment.</p>';
     return;
   }
 
+  const initial = ALLOWED_COMMENT_EMAIL.charAt(0).toUpperCase();
   const html = comments
     .map((comment) => {
       const safeText = escapeHtml(comment.text);
       const timeText = formatDate(comment.createdAt);
-      return `<article class="comment-item"><div>${safeText}</div><small>${ALLOWED_COMMENT_EMAIL} • ${timeText}</small></article>`;
+      return `<div class="comment-item"><div class="avatar">${initial}</div><div><div class="comment-meta"><strong>${ALLOWED_COMMENT_EMAIL}</strong> &bull; ${timeText}</div><div class="comment-text">${safeText}</div></div></div>`;
     })
     .join('');
 
@@ -84,9 +103,7 @@ function updateFormAccess() {
   postCommentButton.disabled = !allowed;
 
   if (!allowed && email.trim()) {
-    showWarning('Email nay khong duoc phep binh luan cho bai hoc nay.');
-  } else if (!allowed) {
-    showWarning('Nhap dung email duoc cap quyen de binh luan.');
+    showWarning('This email is not authorized to comment on this lesson.');
   } else {
     clearWarning();
   }
@@ -97,12 +114,12 @@ function postComment() {
   const text = commentInput.value.trim();
 
   if (!isAllowedEmail(email)) {
-    showWarning('Ban khong co quyen dang binh luan.');
+    showWarning('You are not authorized to post a comment.');
     return;
   }
 
   if (!text) {
-    showWarning('Noi dung binh luan khong duoc de trong.');
+    showWarning('Comment cannot be empty.');
     return;
   }
 
@@ -121,5 +138,6 @@ function postComment() {
 emailInput.addEventListener('input', updateFormAccess);
 postCommentButton.addEventListener('click', postComment);
 
+ensureSeedComments();
 updateFormAccess();
 renderComments();
