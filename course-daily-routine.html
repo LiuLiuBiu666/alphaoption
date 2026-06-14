@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khoa hoc: Daily Trading Routine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --surface: #0f1d30;
+      --surface-2: #14243a;
+      --line: #27405f;
+      --text: #eaf3ff;
+      --muted: #9bb4d3;
+      --brand: #18c685;
+      --danger: #ff6a6a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 8% -10%, rgba(24, 198, 133, 0.22), transparent 65%),
+        radial-gradient(700px 400px at 90% -5%, rgba(69, 166, 255, 0.25), transparent 62%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7, 17, 31, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(39, 64, 95, 0.7);
+    }
+
+    .header-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .course-link {
+      color: #8fd3ff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      padding: 2rem 0 1rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(24, 198, 133, 0.16);
+      color: #99ffd9;
+      border: 1px solid rgba(24, 198, 133, 0.35);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0.8rem 0 0.5rem;
+      font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 68ch;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+      padding: 1rem 0 2rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(15, 29, 48, 0.9), rgba(12, 24, 40, 0.92));
+      overflow: hidden;
+    }
+
+    .video-wrap {
+      padding: 0.9rem;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #2e4562;
+      background: #000;
+      display: block;
+    }
+
+    .video-meta {
+      padding: 0 1rem 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .side {
+      padding: 1rem;
+    }
+
+    .side h2 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .side ul {
+      margin: 0.75rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .comment-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-top: 1px solid var(--line);
+      background: rgba(20, 36, 58, 0.55);
+    }
+
+    .comment-box h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .note {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .row {
+      margin-top: 0.75rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    input,
+    textarea,
+    button {
+      font-family: inherit;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      border: 1px solid #335172;
+      background: #0c1b2d;
+      color: var(--text);
+      padding: 0.65rem 0.75rem;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #16b97d, #1fcd8f);
+      color: #062b1d;
+      font-weight: 800;
+      border: none;
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .warning {
+      margin-top: 0.6rem;
+      color: #ffd3d3;
+      background: rgba(255, 106, 106, 0.15);
+      border: 1px solid rgba(255, 106, 106, 0.4);
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font-size: 0.87rem;
+      display: none;
+    }
+
+    .warning.visible {
+      display: block;
+    }
+
+    .comment-list {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .comment-item {
+      border: 1px solid #2f4e70;
+      border-radius: 10px;
+      padding: 0.7rem;
+      background: #0a1728;
+    }
+
+    .comment-item small {
+      color: var(--muted);
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <h2 class="brand">Clone WEB | Course Viewer</h2>
+      <a class="course-link" href="index.html">Ve trang chu</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Course Page (Custom)</span>
+      <h1>Developing a Daily Trading Routine</h1>
+      <p>
+        Trang hoc tap noi bo su dung video local trong thu muc Course.
+        Muc binh luan chi cho phep email duoc chi dinh dang bai.
+      </p>
+    </section>
+
+    <section class="layout">
+      <article class="panel">
+        <div class="video-wrap">
+          <video controls preload="metadata" src="Course/How to Develop A Daily Trading Routine.mp4"></video>
+        </div>
+        <div class="video-meta">
+          Video source: G:/DU_AN/HTML/Clone WEB/Course/How to Develop A Daily Trading Routine.mp4
+        </div>
+
+        <div class="comment-box">
+          <h3>Binh luan bai hoc</h3>
+          <p class="note">Chi email leona_forex@shipnhanh.online co quyen gui binh luan.</p>
+
+          <div class="row">
+            <input id="commentEmail" type="email" placeholder="Nhap email" value="" />
+            <textarea id="commentText" placeholder="Nhap noi dung binh luan..."></textarea>
+            <button id="postCommentBtn" type="button">Dang binh luan</button>
+          </div>
+
+          <div id="commentWarning" class="warning"></div>
+          <div id="commentList" class="comment-list"></div>
+        </div>
+      </article>
+
+      <aside class="panel side">
+        <h2>Noi dung bai hoc</h2>
+        <ul>
+          <li>Xay dung routine truoc khi vao lenh.</li>
+          <li>Checklist quan ly rui ro va ky luat giao dich.</li>
+          <li>Danh gia ket qua cuoi ngay (EOD review).</li>
+          <li>Ghi nhat ky va cai tien quy trinh theo tuan.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <script src="course-daily-routine.js"></script>
+</body>
+</html>
